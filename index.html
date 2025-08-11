@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kakada - Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+     html {
+    scroll-behavior: smooth;
+  }
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      
+    }
+
+    /* Background Animation: Floating Gradients */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-animation div {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .bg-animation .gradient-1 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(to top, #4f46e5, #8b5cf6);
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .bg-animation .gradient-2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(to bottom, #06b6d4, #22d3ee);
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+
+    .bg-animation .gradient-3 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(to right, #ec4899, #f97316);
+      top: 60%;
+      left: 60%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(50px, 50px) rotate(10deg);
+      }
+      50% {
+        transform: translate(0, 100px) rotate(-10deg);
+      }
+      75% {
+        transform: translate(-50px, 50px) rotate(10deg);
+      }
+    }
+
+    /* Fade-in on scroll */
+    [data-aos] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    [data-aos].aos-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          sans: ['Poppins', 'sans-serif']
+        },
+        extend: {
+          colors: {
+            primary: '#4f46e5',
+            'primary-dark': '#4338ca',
+            secondary: '#06b6d4',
+            accent: '#8b5cf6',
+            'gray-light': '#f8fafc',
+            'gray-dark': '#1e293b'
+          },
+          boxShadow: {
+            'soft': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            'inner-lg': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
+          },
+          keyframes: {
+            'fade-in-up': {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            'float': {
+              '0%, 100%': { transform: 'translate(0, 0)', opacity: 0.3 },
+              '50%': { transform: 'translate(100px, 50px)', opacity: 0.5 }
+            }
+          },
+          animation: {
+            'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+            'float': 'float 15s ease-in-out infinite'
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 leading-relaxed">
+
+  <!-- Background Animation -->
+  <div class="bg-animation">
+    <div class="gradient-1"></div>
+    <div class="gradient-2"></div>
+    <div class="gradient-3"></div>
+  </div>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div class="sidebar-backdrop fixed inset-0 bg-black z-30 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Sidebar Navigation (Mobile) -->
+  <aside class="sidebar fixed top-0 left-0 z-50 w-64 h-full bg-white/90 backdrop-blur-lg shadow-2xl transform -translate-x-full transition-all duration-300 ease-in-out lg:hidden hidden">
+    <div class="flex flex-col h-full px-6 py-8">
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-2xl font-bold text-primary">Kakada</h2>
+        <button id="close-sidebar" class="text-gray-600 hover:text-gray-800 text-3xl leading-none">&times;</button>
+      </div>
+      <nav class="space-y-8 flex-1">
+        <a href="#home" class="block text-xl font-medium text-gray-700 hover:text-primary transition duration-200">Home</a>
+        <a href="#about" class="block text-xl font-medium text-gray-700 hover:text-primary transition duration-200">About Me</a>
+        <a href="#skills" class="block text-xl font-medium text-gray-700 hover:text-primary transition duration-200">Skills</a>
+        <a href="#projects" class="block text-xl font-medium text-gray-700 hover:text-primary transition duration-200">Projects</a>
+        <a href="#contact" class="block text-xl font-medium text-gray-700 hover:text-primary transition duration-200">Contact</a>
+      </nav>
+      <div class="border-t pt-6 mt-8">
+        <p class="text-sm text-gray-500">&copy; 2025 Kakada. All Rights Reserved.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navbar (Desktop) -->
+  <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-40 transition-all duration-300 ">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
+      <a href="#home" class="text-primary font-bold text-xl tracking-tight">Kakada</a>
+      <div class="hidden lg:flex space-x-10">
+        <a href="#home" class="nav-link text-gray-600 hover:text-primary font-medium transition duration-200">Home</a>
+        <a href="#about" class="nav-link text-gray-600 hover:text-primary font-medium transition duration-200">About</a>
+        <a href="#skills" class="nav-link text-gray-600 hover:text-primary font-medium transition duration-200">Skills</a>
+        <a href="#projects" class="nav-link text-gray-600 hover:text-primary font-medium transition duration-200">Projects</a>
+        <a href="#contact" class="nav-link text-gray-600 hover:text-primary font-medium transition duration-200">Contact</a>
+      </div>
+      <button id="menu-button" class="lg:hidden p-2 text-gray-700 focus:outline-none z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="min-h-screen flex items-center justify-center lg:justify-between lg:px-16 pt-32 px-6 relative overflow-hidden">
+    <div class="max-w-2xl space-y-8 text-center lg:text-left z-10" data-aos="fade-in-up">
+      <h1 class="text-4xl lg:text-6xl font-bold leading-tight">
+        Hi, I'm <span class="text-primary">Kakada</span> 👋
+      </h1>
+      <p class="text-lg text-gray-600">
+        A passionate <span class="text-secondary font-semibold">Full-Stack Developer</span> building modern web applications with Angular, React, Laravel, and ASP.NET.
+      </p>
+      <a href="#contact"
+        class="inline-block mt-4 px-8 py-3 bg-primary text-white font-medium rounded-xl shadow-lg hover:shadow-xl hover:bg-primary-dark transition-all duration-300 transform hover:scale-105">
+        Contact Me
+      </a>
+    </div>
+    <div class="hidden lg:block relative">
+      <div class="w-80 h-80 rounded-full bg-gradient-to-tr from-primary to-accent absolute inset-0 blur-3xl opacity-20 animate-pulse"></div>
+      <img src="assest/loco.png" alt="Kakada" class="relative z-10 w-80 h-80 object-cover rounded-full border-4 border-white shadow-2xl" />
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-24 px-6 lg:px-16 bg-gray-light">
+    <div class="max-w-4xl mx-auto text-center lg:text-left" data-aos="fade-in-up">
+      <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-8">About Me</h2>
+      <p class="text-lg text-gray-600 leading-relaxed mb-6">
+        I'm a third-year Management Information Systems student and a dedicated full-stack developer.
+        I specialize in creating responsive, scalable, and user-friendly web applications using modern technologies.
+      </p>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        My passion lies in solving real-world problems through clean code and intuitive design.
+        I focus on performance, accessibility, and delivering pixel-perfect UIs that delight users.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-24 px-6 lg:px-16">
+    <div class="max-w-6xl mx-auto" data-aos="fade-in-up">
+      <h2 class="text-3xl lg:text-4xl font-bold text-primary text-center mb-12">My Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">React.js</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+            <div class="h-3 rounded-full bg-gradient-to-r from-blue-500 to-secondary" style="width: 0;" data-skill="90%"></div>
+          </div>
+          <p class="text-sm text-gray-500">90%</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Angular</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+            <div class="h-3 rounded-full bg-gradient-to-r from-red-500 to-orange-500" style="width: 0;" data-skill="85%"></div>
+          </div>
+          <p class="text-sm text-gray-500">85%</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Laravel</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+            <div class="h-3 rounded-full bg-gradient-to-r from-red-600 to-pink-500" style="width: 0;" data-skill="80%"></div>
+          </div>
+          <p class="text-sm text-gray-500">80%</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Tailwind CSS</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+            <div class="h-3 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500" style="width: 0;" data-skill="95%"></div>
+          </div>
+          <p class="text-sm text-gray-500">95%</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">ASP.NET</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+            <div class="h-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-600" style="width: 0;" data-skill="75%"></div>
+          </div>
+          <p class="text-sm text-gray-500">75%</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">MongoDB</h3>
+          <div class="w-full bg-gray-200 rounded-full h-3 mb-2">
+            <div class="h-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-500" style="width: 0;" data-skill="80%"></div>
+          </div>
+          <p class="text-sm text-gray-500">80%</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-24 px-6 lg:px-16 bg-white">
+    <div class="max-w-6xl mx-auto" data-aos="fade-in-up">
+      <h2 class="text-3xl lg:text-4xl font-bold text-primary text-center mb-12">My Projects</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+        <!-- Project 1: Small Market -->
+        <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+          <div class="h-56 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <span class="text-white text-2xl font-bold">Small Market</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Small Market - Full Stack Web App</h3>
+            <p class="text-gray-600 mb-4">
+              A full-stack inventory and sales management system built with Angular (frontend), Laravel (backend), and MySQL (database).
+              Features include product management, sales tracking, reporting, and user authentication.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">Angular</span>
+              <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Laravel</span>
+              <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">MySQL</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">REST API</span>
+            </div>
+            <a href="https://small-martket-frontend-5aqb.vercel.app/" target="_blank"
+               class="text-primary font-medium hover:underline inline-flex items-center">
+              View Live →
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: Portfolio Website -->
+        <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+          <div class="h-56 bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
+            <span class="text-white text-2xl font-bold">Portfolio</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Personal Portfolio</h3>
+            <p class="text-gray-600 mb-4">
+              A modern, responsive portfolio built with HTML, Tailwind CSS, and vanilla JavaScript.
+              Showcases my skills, projects, and contact form with smooth animations and mobile-first design.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">Tailwind CSS</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">JavaScript</span>
+              <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Responsive</span>
+            </div>
+            <a href="#" class="text-primary font-medium hover:underline inline-flex items-center">
+              View Source →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <!-- Telegram Contact Section -->
+<section id="contact" class="py-24 px-6 lg:px-16 bg-gray-light text-center">
+  <div class="max-w-xl mx-auto">
+    <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-8">Let's Connect on Telegram</h2>
+    <p class="text-lg text-gray-600 mb-12">
+      Got questions? Need help? Feel free to message me directly on Telegram!
+    </p>
+
+    <!-- Telegram QR Code Image -->
+    <div class="flex flex-col items-center mb-8">
+      <img src="assest/qr.jpg" alt="Telegram QR Code" class="w-96 h-96 mb-4" />
+      <a href="https://t.me/UNG_KAKADA" target="_blank" class="text-primary font-medium hover:underline">
+        @UNG_KAKADA
+      </a>
+    </div>
+
+    <!-- Direct Link Button -->
+    <a href="https://t.me/UNG_KAKADA" target="_blank"
+       class="inline-block px-8 py-3 bg-primary text-white font-medium rounded-xl shadow-lg hover:shadow-xl hover:bg-primary-dark transition-all duration-300 transform hover:scale-105">
+      Message Me on Telegram
+    </a>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t py-8">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16 text-center">
+      <p class="text-gray-500">Crafted with care and code. &copy; 2025 Kakada.</p>
+      <div class="mt-4 flex justify-center space-x-6">
+        <a href="#" class="text-gray-400 hover:text-primary transition">LinkedIn</a>
+        <a href="#" class="text-gray-400 hover:text-primary transition">GitHub</a>
+        <a href="#" class="text-gray-400 hover:text-primary transition">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-button');
+    const closeBtn = document.getElementById('close-sidebar');
+    const sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+    const sidebar = document.querySelector('.sidebar');
+    const body = document.body;
+
+    function openSidebar() {
+      sidebar.classList.remove('hidden');
+      sidebarBackdrop.classList.remove('hidden');
+      body.style.overflow = 'hidden';
+      
+      // Trigger reflow to enable transition
+      void sidebar.offsetWidth;
+      
+      sidebar.classList.remove('-translate-x-full');
+      sidebarBackdrop.classList.add('opacity-50');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.add('-translate-x-full');
+      sidebarBackdrop.classList.remove('opacity-50');
+      
+      setTimeout(() => {
+        sidebar.classList.add('hidden');
+        sidebarBackdrop.classList.add('hidden');
+        body.style.overflow = '';
+      }, 300); // Match this with your transition duration
+    }
+
+    menuBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+
+    // Close sidebar when clicking on nav links
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+
+    // Animate skill bars on scroll
+    const skillBars = document.querySelectorAll('[data-skill]');
+    const skillsSection = document.getElementById('skills');
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        skillBars.forEach(bar => {
+          const width = bar.getAttribute('data-skill');
+          bar.style.width = width;
+        });
+      }
+    }, { threshold: 0.5 });
+
+    observer.observe(skillsSection);
+
+    // Animate fade-in elements
+    const fadeElements = document.querySelectorAll('[data-aos]');
+    const aosObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('aos-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => aosObserver.observe(el));
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('text-primary');
+        link.classList.add('text-gray-600');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.remove('text-gray-600');
+          link.classList.add('text-primary');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

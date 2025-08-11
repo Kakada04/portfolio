@@ -1,0 +1,14 @@
+@keyframes fadein {
+  from {
+    transform: scaleX(10%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animation-fadein {
+  animation: fadein 0.3s ease-in-out forwards;
+}
